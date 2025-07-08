@@ -21,7 +21,7 @@ const Register = () => {
         }
 
         try {
-            const response = await axios.post('http://localhost:8000/api/auth/signup', {
+            const response = await axios.post('https://mutualy-backend-mb9z.vercel.app/api/auth/signup', {
                 name,
                 email,
                 password
@@ -55,7 +55,7 @@ const Register = () => {
                         <input
                             type="text"
                             value={userData.name}
-                            onChange={(e) => setUserData({...userData, name: e.target.value})}
+                            onChange={(e) => setUserData({ ...userData, name: e.target.value })}
                             className="border border-gray-300 bg-white/50 rounded p-2 w-full"
                             placeholder="Enter your name"
                             required
@@ -66,7 +66,7 @@ const Register = () => {
                         <input
                             type="email"
                             value={userData.email}
-                            onChange={(e) => setUserData({...userData, email: e.target.value})}
+                            onChange={(e) => setUserData({ ...userData, email: e.target.value })}
                             className="border border-gray-300 bg-white/50 rounded p-2 w-full"
                             placeholder="Enter your email"
                             required
@@ -77,7 +77,7 @@ const Register = () => {
                         <input
                             type='password'
                             value={userData.password}
-                            onChange={(e) => setUserData({...userData, password: e.target.value})}
+                            onChange={(e) => setUserData({ ...userData, password: e.target.value })}
                             className="border border-gray-300 bg-white/50 rounded p-2 w-full"
                             placeholder="Enter your password"
                             required

@@ -1,18 +1,18 @@
-import React, {useEffect, useState} from 'react';
-import {Link, useParams} from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
-import {IoPlayBackOutline} from "react-icons/io5";
-import {ToastError, ToastSuccess} from "../utils.js";
+import { IoPlayBackOutline } from "react-icons/io5";
+import { ToastError, ToastSuccess } from "../utils.js";
 
 const ViewFund = () => {
-    const {schemeCode} = useParams();
+    const { schemeCode } = useParams();
     const [fund, setFund] = useState(null);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const fetchFund = async () => {
             try {
-                const response = await axios.get(`http://localhost:8000/api/mutualfunds/${schemeCode}`, {headers: {'Authorization': localStorage.getItem("token")}});
+                const response = await axios.get(`https://mutualy-backend-mb9z.vercel.app/api/mutualfunds/${schemeCode}`, { headers: { 'Authorization': localStorage.getItem("token") } });
                 setFund(response.data);
                 setLoading(false);
             } catch (error) {
@@ -35,9 +35,9 @@ const ViewFund = () => {
     const handleSaveFund = async () => {
         try {
             const response = await axios.post(
-                'http://localhost:8000/api/mutualfunds/savefunds',
-                {schemeCode: fund.meta.scheme_code},
-                {headers: {'Authorization': localStorage.getItem("token")}}
+                'https://mutualy-backend-mb9z.vercel.app/api/mutualfunds/savefunds',
+                { schemeCode: fund.meta.scheme_code },
+                { headers: { 'Authorization': localStorage.getItem("token") } }
             );
             console.log(response.data);
             ToastSuccess(response.data.message); // Replace with ToastSuccess if you import it here
@@ -53,9 +53,9 @@ const ViewFund = () => {
             <div className='flex items-center justify-between mb-4'>
                 <h1 className="text-3xl font-bold mb-4">Fund Details</h1>
                 <Link to={'/funds'}
-                      className='btn bg-gray-600/20 px-5 py-2 rounded-md shadow-blue-400 hover:shadow-md transition-all duration-300'
+                    className='btn bg-gray-600/20 px-5 py-2 rounded-md shadow-blue-400 hover:shadow-md transition-all duration-300'
                 >
-                    <IoPlayBackOutline/>
+                    <IoPlayBackOutline />
                 </Link>
             </div>
             <div className="flex flex-col bg-gray-100 p-4 rounded shadow gap-2">

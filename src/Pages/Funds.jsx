@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, { useEffect, useState } from 'react'
 import axios from "axios";
 import SearchBar from "../Components/SearchBar.jsx";
 import FundCard from "../Components/FundCard.jsx";
@@ -11,9 +11,10 @@ const Funds = () => {
     const [searchTerm, setSearchTerm] = useState("");
 
     useEffect(() => {
-        axios.get('http://localhost:8000/api/mutualfunds',
-            {headers: {'Authorization': localStorage.getItem("token")}
-        })
+        axios.get('https://mutualy-backend-mb9z.vercel.app/api/mutualfunds',
+            {
+                headers: { 'Authorization': localStorage.getItem("token") }
+            })
             .then((response) => {
                 setFunds(response.data);
                 setLoading(false);
@@ -43,7 +44,7 @@ const Funds = () => {
 
                 {/*search bar component*/}
                 <div>
-                    <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm}/>
+                    <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
                 </div>
 
                 <div className='border-2 border-gray-200 p-5 rounded-md h-screen w-full mt-6 overflow-scroll'>
@@ -57,7 +58,7 @@ const Funds = () => {
                                 {/*mutual fund Cards */}
                                 {
                                     visibleFunds.map((fund =>
-                                            <FundCard key={fund.schemeCode} fund={fund}/>
+                                        <FundCard key={fund.schemeCode} fund={fund} />
                                     ))
                                 }
                             </div>

@@ -1,18 +1,18 @@
 import React from 'react'
-import {Link} from "react-router-dom";
-import {GrView} from "react-icons/gr";
-import {LuSave} from "react-icons/lu";
+import { Link } from "react-router-dom";
+import { GrView } from "react-icons/gr";
+import { LuSave } from "react-icons/lu";
 import axios from "axios";
-import {ToastError, ToastSuccess} from "../utils.js";
+import { ToastError, ToastSuccess } from "../utils.js";
 
 
-const FundCard = ({fund}) => {
+const FundCard = ({ fund }) => {
 
     const handleSaveFund = async () => {
         try {
-            const response = await axios.post('http://localhost:8000/api/mutualfunds/savefunds',
-                {schemeCode: fund.schemeCode},
-                {headers: {'Authorization': localStorage.getItem("token")}}
+            const response = await axios.post('https://mutualy-backend-mb9z.vercel.app/api/mutualfunds/savefunds',
+                { schemeCode: fund.schemeCode },
+                { headers: { 'Authorization': localStorage.getItem("token") } }
             );
             ToastSuccess(response.data.message);
         } catch (error) {
@@ -32,12 +32,12 @@ const FundCard = ({fund}) => {
                     className='bg-gray-400/20 p-2 rounded-md shadow-blue-400 hover:shadow-md transition-all duration-300'
                     to={`/viewFund/${fund.schemeCode}`}
                 >
-                    <GrView size='20px'/>
+                    <GrView size='20px' />
                 </Link>
                 <div
                     onClick={handleSaveFund}
                     className='bg-gray-400/20 p-2 rounded-md shadow-blue-400 hover:shadow-md transition-all duration-300'>
-                    <LuSave size='20px'/>
+                    <LuSave size='20px' />
                 </div>
             </div>
         </div>

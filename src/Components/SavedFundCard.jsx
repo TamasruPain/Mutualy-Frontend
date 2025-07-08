@@ -11,7 +11,7 @@ const SavedFundCard = ({ saveFunds, onDelete, onRefetch }) => {
 
     const handleDeleteFund = async () => {
         try {
-            const response = await axios.delete(`http://localhost:8000/api/mutualfunds/deletesavedfunds/${schemeCode}`, {
+            const response = await axios.delete(`https://mutualy-backend-mb9z.vercel.app/api/mutualfunds/deletesavedfunds/${schemeCode}`, {
                 headers: { 'Authorization': localStorage.getItem("token") }
             });
             ToastSuccess(response.data.message);

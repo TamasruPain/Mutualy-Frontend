@@ -1,6 +1,6 @@
-import React, {useState} from 'react'
-import {Link, useNavigate} from "react-router-dom";
-import {ToastSuccess, ToastError} from "../utils.js";
+import React, { useState } from 'react'
+import { Link, useNavigate } from "react-router-dom";
+import { ToastSuccess, ToastError } from "../utils.js";
 import axios from "axios";
 
 const Login = () => {
@@ -13,18 +13,18 @@ const Login = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const {email, password} = userData;
+        const { email, password } = userData;
 
         if (!email || !password) {
             return ToastError("Please fill all the fields");
         }
 
         try {
-            const response = await axios.post('http://localhost:8000/api/auth/signin', {
+            const response = await axios.post('https://mutualy-backend-mb9z.vercel.app/api/auth/signin', {
                 email,
                 password
             });
-            const {success, message, error, jwtToken, name, userid} = response.data;
+            const { success, message, error, jwtToken, name, userid } = response.data;
 
             if (success) {
                 localStorage.setItem("token", jwtToken);
@@ -57,7 +57,7 @@ const Login = () => {
                         <input
                             type="email"
                             value={userData.email}
-                            onChange={(e) => setUserData({...userData, email: e.target.value})}
+                            onChange={(e) => setUserData({ ...userData, email: e.target.value })}
                             className="border border-gray-300 bg-white/50 rounded p-2 w-full"
                             placeholder="Enter your email"
                             required
@@ -68,7 +68,7 @@ const Login = () => {
                         <input
                             type='password'
                             value={userData.password}
-                            onChange={(e) => setUserData({...userData, password: e.target.value})}
+                            onChange={(e) => setUserData({ ...userData, password: e.target.value })}
                             className="border border-gray-300 bg-white/50 rounded p-2 w-full"
                             placeholder="Enter your password"
                             required

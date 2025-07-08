@@ -16,7 +16,7 @@ const Dashboard = () => {
 
     const fetchSavedFunds = () => {
         setLoading(true);
-        axios.get('http://localhost:8000/api/mutualfunds/getsavedfunds', {
+        axios.get('https://mutualy-backend-mb9z.vercel.app/api/mutualfunds/getsavedfunds', {
             headers: { 'Authorization': localStorage.getItem("token") }
         })
             .then((response) => {
