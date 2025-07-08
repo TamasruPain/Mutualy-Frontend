@@ -38,7 +38,7 @@ const Home = () => {
                             </Link>
                             <Link to="/register"
                                 className="btn bg-black/30 px-4 py-2 rounded-lg hover:shadow-blue-300 shadow-md hover:bg-black/80 text-white transition duration-200">
-                                Sing Up
+                                Sign Up
                             </Link>
                         </div>
                     </div>
