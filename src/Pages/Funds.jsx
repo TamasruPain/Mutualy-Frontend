@@ -39,6 +39,20 @@ const Funds = () => {
     return (
         <div className="p-5">
 
+            <div className='flex items-center justify-between'>
+                <Link to={'/funds'}
+                    className="bg-black/60 px-2 py-2 rounded-lg hover:shadow-blue-300 shadow-md transition duration-200 hover:bg-black/80 text-white  block md:hidden"
+                >
+                    Mutual funds
+                </Link>
+                <button
+                    onClick={handleLogout}
+                    className="bg-black/60 px-2 py-2 rounded-lg hover:shadow-blue-300 shadow-md transition duration-200 hover:bg-black/80 text-white  block md:hidden"
+                >
+                    Log out
+                </button>
+            </div>
+
             <div className='flex items-center justify-center flex-col m-5'>
                 <h1 className="text-3xl font-serif">Find mutual funds from <span className='border rounded-md px-2 py-1 bg-blue-600/20 border-blue-600/10'>Mutualy</span></h1>
 

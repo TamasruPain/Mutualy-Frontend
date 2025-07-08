@@ -36,7 +36,7 @@ const Navbar = () => {
 
                 <div className='flex w-auto md:w-[45%] lg:w-[55%] xl:w-[65%] gap-2 ml-2'>
                     <RiFundsFill className='' size="30px"/>
-                    <Link to='/' className="text-2xl font-serif "> Mutualy</Link>
+                    <Link to='/funds' className="text-2xl font-serif "> Mutualy</Link>
                 </div>
 
                 <div className="w-[1%] md:w-[35%] lg:w-[35%] xl:w-[55%] hidden md:block">
@@ -59,7 +59,7 @@ const Navbar = () => {
                                 Sign In
                             </Link>
                             <Link to="/register"
-                                  className="bg-black/60 px-4 py-2 rounded-lg hover:shadow-blue-300 shadow-md transition duration-200 hover:bg-black/80 text-white "
+                                  className="bg-black/60 px-4 py-2 rounded-lg hover:shadow-blue-300 shadow-md transition duration-200 hover:bg-black/80 text-white hidden md:block "
                             >
                                 Sign Up
                             </Link>

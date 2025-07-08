@@ -4,7 +4,7 @@ import SearchBar from "../Components/SearchBar.jsx";
 import SavedFundCard from "../Components/SavedFundCard.jsx";
 import { FaPersonChalkboard } from "react-icons/fa6";
 import { ToastSuccess } from "../utils.js";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 
 const Dashboard = () => {
@@ -58,7 +58,13 @@ const Dashboard = () => {
     }
     return (
         <div className="p-5">
-            <div className='flex items-center justify-end'>
+
+            <div className='flex items-center justify-between'>
+                <Link to={'/funds'}
+                    className="bg-black/60 px-2 py-2 rounded-lg hover:shadow-blue-300 shadow-md transition duration-200 hover:bg-black/80 text-white  block md:hidden"
+                >
+                    Mutual funds
+                </Link>
                 <button
                     onClick={handleLogout}
                     className="bg-black/60 px-2 py-2 rounded-lg hover:shadow-blue-300 shadow-md transition duration-200 hover:bg-black/80 text-white  block md:hidden"
