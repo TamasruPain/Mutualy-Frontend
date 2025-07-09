@@ -1,9 +1,8 @@
 import { Link } from "react-router-dom";
 import { GrView } from "react-icons/gr";
-import axios from "axios";
 import { ToastSuccess, ToastError } from "../utils.js";
 import { MdDeleteOutline } from "react-icons/md";
-import { useEffect } from "react";
+import axiosInstance from '../axios.js'
 
 const SavedFundCard = ({ saveFunds, onDelete, onRefetch }) => {
     const schemeCode = saveFunds.meta.scheme_code;
@@ -11,15 +10,15 @@ const SavedFundCard = ({ saveFunds, onDelete, onRefetch }) => {
 
     const handleDeleteFund = async () => {
         try {
-            const response = await axios.delete(`https://mutualy-backend-mb9z.vercel.app/api/mutualfunds/deletesavedfunds/${schemeCode}`, {
+            const response = await axiosInstance.delete(`/api/mutualfunds/deletesavedfunds/${schemeCode}`, {
                 headers: { 'Authorization': localStorage.getItem("token") }
             });
-            ToastSuccess(response.data.message);
+            ToastSuccess('Fund deleted successfully');
             onDelete(schemeCode);
             onRefetch();
         } catch (error) {
             console.error(error.response?.data || error.message);
-            ToastError(error.response?.data?.message || "Failed to delete fund");
+            ToastError("Failed to delete fund");
         }
     }
 

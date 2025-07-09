@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from "react-router-dom";
 import { ToastSuccess, ToastError } from "../utils.js";
-import axios from "axios";
+import axiosInstance from '../axios.js';
 
 const Login = () => {
     const navigate = useNavigate();
@@ -20,7 +20,7 @@ const Login = () => {
         }
 
         try {
-            const response = await axios.post('https://mutualy-backend-mb9z.vercel.app/api/auth/signin', {
+            const response = await axiosInstance.post('/api/auth/signin', {
                 email,
                 password
             });
@@ -34,15 +34,13 @@ const Login = () => {
                 ToastSuccess(message);
                 navigate('/dashboard');
             } else if (error) {
-                const errorDetail = error?.details?.[0]?.message || message || "Signup failed";
-                ToastError(errorDetail);
+                ToastError(" User not found or invalid credentials");    
+                ToastError("Login failed");
             }
         } catch (error) {
             console.error(error.response?.data || error.message);
-            const errMsg = error.response?.data?.error?.details?.[0]?.message
-                || error.response?.data?.message
-                || "Something went wrong";
-            ToastError(errMsg);
+            ToastError("Please check your email and password");
+            ToastError("Login failed");
         }
     };
 

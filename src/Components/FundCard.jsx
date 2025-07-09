@@ -2,22 +2,22 @@ import React from 'react'
 import { Link } from "react-router-dom";
 import { GrView } from "react-icons/gr";
 import { LuSave } from "react-icons/lu";
-import axios from "axios";
 import { ToastError, ToastSuccess } from "../utils.js";
+import axiosInstance from '../axios.js';
 
 
 const FundCard = ({ fund }) => {
 
     const handleSaveFund = async () => {
         try {
-            const response = await axios.post('https://mutualy-backend-mb9z.vercel.app/api/mutualfunds/savefunds',
+            const response = await axiosInstance.post('/api/mutualfunds/savefunds',
                 { schemeCode: fund.schemeCode },
                 { headers: { 'Authorization': localStorage.getItem("token") } }
             );
-            ToastSuccess(response.data.message);
+            ToastSuccess("Fund saved successfully");
         } catch (error) {
             console.error(error.response?.data || error.message);
-            ToastError(error.response?.data?.message || "Failed to save fund");
+            ToastError( "Failed to save fund");
         }
     }
     return (

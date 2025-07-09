@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import axios from 'axios';
 import { IoPlayBackOutline } from "react-icons/io5";
 import { ToastError, ToastSuccess } from "../utils.js";
+import axiosInstance from '../axios.js';
 
 const ViewFund = () => {
     const { schemeCode } = useParams();
@@ -12,7 +12,7 @@ const ViewFund = () => {
     useEffect(() => {
         const fetchFund = async () => {
             try {
-                const response = await axios.get(`https://mutualy-backend-mb9z.vercel.app/api/mutualfunds/${schemeCode}`, { headers: { 'Authorization': localStorage.getItem("token") } });
+                const response = await axiosInstance.get(`/api/mutualfunds/${schemeCode}`, { headers: { 'Authorization': localStorage.getItem("token") } });
                 setFund(response.data);
                 setLoading(false);
             } catch (error) {
@@ -34,8 +34,7 @@ const ViewFund = () => {
 
     const handleSaveFund = async () => {
         try {
-            const response = await axios.post(
-                'https://mutualy-backend-mb9z.vercel.app/api/mutualfunds/savefunds',
+            const response = await axiosInstance.post('/api/mutualfunds/savefunds',
                 { schemeCode: fund.meta.scheme_code },
                 { headers: { 'Authorization': localStorage.getItem("token") } }
             );

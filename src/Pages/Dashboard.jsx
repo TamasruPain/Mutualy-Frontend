@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import axios from "axios";
 import SearchBar from "../Components/SearchBar.jsx";
 import SavedFundCard from "../Components/SavedFundCard.jsx";
 import { FaPersonChalkboard } from "react-icons/fa6";
 import { ToastSuccess } from "../utils.js";
 import { Link, useNavigate } from "react-router-dom";
+import axiosInstance from '../axios.js';
 
 
 const Dashboard = () => {
@@ -16,7 +16,7 @@ const Dashboard = () => {
 
     const fetchSavedFunds = () => {
         setLoading(true);
-        axios.get('https://mutualy-backend-mb9z.vercel.app/api/mutualfunds/getsavedfunds', {
+        axiosInstance.get('/api/mutualfunds/getsavedfunds', {
             headers: { 'Authorization': localStorage.getItem("token") }
         })
             .then((response) => {
@@ -37,13 +37,6 @@ const Dashboard = () => {
     const loadMore = () => {
         setNext(next + 20);
     }
-    const filteredFunds = saveFunds.filter(fund =>
-        fund.meta.scheme_name && fund.meta.scheme_name.toLowerCase().includes(searchTerm.toLowerCase())
-    );
-
-
-    const visibleFunds = filteredFunds.slice(0, next);
-
     const handleLogout = () => {
         localStorage.removeItem("token")
         localStorage.removeItem("loggedInUserID");
@@ -56,6 +49,19 @@ const Dashboard = () => {
     const handleDelete = (deletedSchemeCode) => {
         setSaveFunds(prev => prev.filter(fund => fund.schemeCode !== deletedSchemeCode));
     }
+
+    const handleResetClick = () => {
+        setSearchTerm('');
+        setNext(20);
+    }
+
+    const filteredFunds = saveFunds.filter(fund =>
+        fund.meta.scheme_name && fund.meta.scheme_name.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+
+
+    const visibleFunds = filteredFunds.slice(0, next);
+
     return (
         <div className="p-5">
 
@@ -78,7 +84,11 @@ const Dashboard = () => {
 
                 {/*search bar component*/}
                 <div>
-                    <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+                    <SearchBar
+                        searchTerm={searchTerm}
+                        setSearchTerm={setSearchTerm}
+                        onResetClick={handleResetClick}
+                    />
                 </div>
 
                 <div className='border-2 border-gray-200 p-5 rounded-md h-screen w-full mt-6 overflow-scroll'>

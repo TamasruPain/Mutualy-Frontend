@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from "react-router-dom";
 import { ToastError, ToastSuccess } from "../utils.js";
-import axios from "axios";
+import axiosInstance from '../axios.js';
 
 const Register = () => {
     const navigate = useNavigate();
@@ -21,7 +21,7 @@ const Register = () => {
         }
 
         try {
-            const response = await axios.post('https://mutualy-backend-mb9z.vercel.app/api/auth/signup', {
+            const response = await axiosInstance.post('/api/auth/signup', {
                 name,
                 email,
                 password
@@ -32,15 +32,12 @@ const Register = () => {
                 setUserData({ name: '', email: '', password: '' }); // reset after success
                 navigate('/login');
             } else if (error) {
-                const errorDetail = error?.details?.[0]?.message || message || "Signup failed";
-                ToastError(errorDetail);
+                ToastError("User already exists or Invalid credentials");
+                ToastError("Signup failed");
             }
         } catch (error) {
-            console.error(error.response?.data || error.message);
-            const errMsg = error.response?.data?.error?.details?.[0]?.message
-                || error.response?.data?.message
-                || "Something went wrong";
-            ToastError(errMsg);
+            ToastError("check your email and password");
+            ToastError("Sign Up failed");
         }
     };
 
